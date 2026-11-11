@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#123b50">
+
+    <title>Acceso familiar | MANOVISIÓN</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #123b50, #1d6475);
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 390px;
+            padding: 32px 25px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .logo {
+            width: 85px;
+            height: 85px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #123b50;
+            font-size: 25px;
+        }
+
+        .descripcion {
+            margin: 12px 0 25px;
+            color: #60717b;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            color: #123b50;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #d8e1e6;
+            border-radius: 10px;
+            font-size: 17px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #1683a0;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            background: #1683a0;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #116b83;
+        }
+
+        .error {
+            margin-top: 17px;
+            padding: 12px;
+            border-radius: 9px;
+            background: #fdeaea;
+            color: #b42318;
+            font-size: 14px;
+        }
+
+        .pie {
+            margin-top: 25px;
+            color: #82919a;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="contenedor">
+
+        <img
+            class="logo"
+            src="{{ url_for('static', filename='images/icono-manovision.svg') }}"
+            alt="MANOVISIÓN"
+        >
+
+        <h1>MANOVISIÓN</h1>
+
+        <p class="descripcion">
+            Acceso familiar.
+            Ingresa la contraseña para consultar y responder
+            las solicitudes.
+        </p>
+
+        <form method="POST" action="{{ url_for('login') }}">
+
+            <label for="password">Contraseña familiar</label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Escribe la contraseña"
+                autocomplete="current-password"
+                required
+                autofocus
+            >
+
+            <button type="submit">
+                Entrar
+            </button>
+
+        </form>
+
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <div class="pie">
+            MANOVISIÓN 3.0 · Comunicación familiar
+        </div>
+
+    </main>
+
+</body>
+</html>

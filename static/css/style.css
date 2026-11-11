@@ -1,0 +1,153 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #101827;
+    color: white;
+}
+
+.encabezado {
+    background: #17243a;
+    padding: 25px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.encabezado h1 {
+    margin: 0;
+    color: #42d6a4;
+    font-size: 30px;
+}
+
+.encabezado p {
+    color: #bdc8d8;
+}
+
+.estado {
+    color: #42d6a4;
+    font-weight: bold;
+}
+
+.contenedor {
+    width: 92%;
+    max-width: 1200px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.panel {
+    background: #1b2a41;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.panel h2 {
+    color: #42d6a4;
+}
+
+.camara {
+    height: 260px;
+    background: #080d16;
+    border: 2px dashed #52657e;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #aebdce;
+    padding: 15px;
+}
+
+.reconocimiento,
+.solicitud {
+    background: #263951;
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.botones {
+    display: grid;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+button {
+    min-height: 85px;
+    border: none;
+    border-radius: 12px;
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.confirmar {
+    background: #16a66a;
+    color: white;
+}
+
+.cancelar {
+    background: #d94343;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+#resultado {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.historial {
+    grid-column: 1 / -1;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #aebdce;
+}
+
+@media (max-width: 750px) {
+    .contenedor {
+        grid-template-columns: 1fr;
+    }
+
+    .historial {
+        grid-column: auto;
+    }
+
+    .encabezado {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+.camara {
+    overflow: hidden;
+    padding: 0;
+}
+
+.camara img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #080d16;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}

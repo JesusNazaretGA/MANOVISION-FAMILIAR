@@ -1,0 +1,33 @@
+venv/
+__pycache__/
+*.pyc
+.env
+*.db
+*.sqlite3
+ai/models/*.pkl
+ai/models/*.joblib
+firebase-credentials.json
+.DS_Store
+secrets/
+# Archivos locales y temporales
+.venv/
+instance/
+.pytest_cache/
+*.log
+*.tmp
+firebase-service-account.json
+
+# Componentes que no necesita el servidor familiar de Render
+ai/
+app.py
+audio/
+communication/
+config.py
+database/
+robotics/
+tests/
+vision/
+requirements.txt
+
+# Página principal del equipo local
+templates/index.html

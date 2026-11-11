@@ -1,0 +1,21 @@
+{
+  "id": "/familiar",
+  "name": "MANOVISIÓN Familiar",
+  "short_name": "MANOVISIÓN",
+  "description": "Aplicación de comunicación familiar de MANOVISIÓN 3.0",
+  "lang": "es-MX",
+  "start_url": "/familiar",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eef3f6",
+  "theme_color": "#123b50",
+  "icons": [
+    {
+      "src": "/static/images/icono-manovision.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
