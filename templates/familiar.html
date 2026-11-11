@@ -183,6 +183,25 @@
         </div>
     </section>
 
+    <!-- NOTIFICACIONES -->
+    <section class="tarjeta">
+        <h2>Notificaciones del dispositivo</h2>
+
+        <p>
+            Activa las notificaciones para recibir avisos cuando
+            MANOVISIÓN necesite comunicar algo.
+        </p>
+
+        <button class="btn-mensaje" id="btnActivarNotificaciones">
+            Activar notificaciones
+        </button>
+
+        <p id="estadoNotificaciones" style="margin-top: 12px; font-size: 14px;">
+            Notificaciones todavía no activadas.
+        </p>
+    </section>
+
+    <!-- SOLICITUDES -->
     <section class="tarjeta">
         <h2>Solicitudes de MANOVISIÓN</h2>
 
@@ -211,6 +230,7 @@
         </div>
     </section>
 
+    <!-- RESPUESTAS RAPIDAS -->
     <section class="tarjeta">
         <h2>Respuestas rápidas</h2>
 
@@ -233,6 +253,7 @@
         </div>
     </section>
 
+    <!-- RESPUESTA PERSONALIZADA -->
     <section class="tarjeta">
         <h2>Escribir respuesta</h2>
 
@@ -252,8 +273,14 @@
     MANOVISIÓN 3.0 · Sistema de comunicación asistida
 </footer>
 
+<!-- FIREBASE CLOUD MESSAGING -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js"></script>
+
+<!-- SCRIPTS DE MANOVISION -->
 <script src="{{ url_for('static', filename='js/familiar.js') }}"></script>
 <script src="{{ url_for('static', filename='js/pwa.js') }}"></script>
+<script src="{{ url_for('static', filename='js/notificaciones.js') }}"></script>
 
 </body>
 </html>
