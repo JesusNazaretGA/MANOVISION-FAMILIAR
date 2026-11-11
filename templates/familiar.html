@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#123b50">
-<link rel="manifest" href="/static/manifest.json">
+    <link rel="manifest" href="/static/manifest.json">
 
-    <title>MANOVISIÃ“N - Familiar</title>
+    <title>MANOVISIÓN - Familiar</title>
 
     <style>
         * {
@@ -169,8 +169,8 @@
 <body>
 
 <header>
-    <h1>MANOVISIÃ“N</h1>
-    <p>AplicaciÃ³n de comunicaciÃ³n familiar</p>
+    <h1>MANOVISIÓN</h1>
+    <p>Aplicación de comunicación familiar</p>
 </header>
 
 <main>
@@ -178,18 +178,18 @@
     <section class="estado">
         <div class="indicador"></div>
         <div>
-            <strong>ConexiÃ³n pendiente</strong>
-            <p id="estadoConexion">Esperando vinculaciÃ³n del dispositivo</p>
+            <strong>Conexión pendiente</strong>
+            <p id="estadoConexion">Esperando vinculación del dispositivo</p>
         </div>
     </section>
 
     <section class="tarjeta">
-        <h2>Solicitudes de MANOVISIÃ“N</h2>
+        <h2>Solicitudes de MANOVISIÓN</h2>
 
         <div class="espera" id="espera">
-            <div class="icono">ðŸ“©</div>
+            <div class="icono">📩</div>
             <h3>Esperando solicitudes</h3>
-            <p>Cuando el dispositivo envÃ­e una peticiÃ³n, aparecerÃ¡ aquÃ­.</p>
+            <p>Cuando el dispositivo envíe una petición, aparecerá aquí.</p>
         </div>
 
         <div class="solicitud" id="solicitud">
@@ -206,21 +206,21 @@
             </button>
 
             <button class="btn-hablar" id="btnEscuchar" disabled>
-                ðŸ”Š Escuchar solicitud
+                🔊 Escuchar solicitud
             </button>
         </div>
     </section>
 
     <section class="tarjeta">
-        <h2>Respuestas rÃ¡pidas</h2>
+        <h2>Respuestas rápidas</h2>
 
         <div class="respuestas">
             <button class="respuesta" data-respuesta="Ya voy, enseguida te ayudo." disabled>
                 Ya voy, enseguida te ayudo.
             </button>
 
-            <button class="respuesta" data-respuesta="Â¿QuÃ© necesitas?" disabled>
-                Â¿QuÃ© necesitas?
+            <button class="respuesta" data-respuesta="¿Qué necesitas?" disabled>
+                ¿Qué necesitas?
             </button>
 
             <button class="respuesta" data-respuesta="Estoy contigo, no te preocupes." disabled>
@@ -249,12 +249,11 @@
 </main>
 
 <footer>
-    MANOVISIÃ“N 3.0 Â· Sistema de comunicaciÃ³n asistida
+    MANOVISIÓN 3.0 · Sistema de comunicación asistida
 </footer>
 
 <script src="{{ url_for('static', filename='js/familiar.js') }}"></script>
-
 <script src="{{ url_for('static', filename='js/pwa.js') }}"></script>
+
 </body>
 </html>
-
