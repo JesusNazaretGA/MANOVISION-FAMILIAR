@@ -1,4 +1,27 @@
 
+/* ==========================================
+   MANOVISION 3.0
+   IDENTIDAD VISUAL GENERAL
+========================================== */
+
+:root {
+    --azul-oscuro: #123b50;
+    --azul-principal: #176b91;
+    --fondo: #eef3f6;
+    --blanco: #ffffff;
+    --texto: #203442;
+    --texto-secundario: #71818b;
+    --borde: #cbd6dc;
+    --fondo-suave: #edf3f6;
+    --verde: #16834a;
+    --rojo: #c83e3e;
+    --sombra: 0 3px 12px #0000000c;
+}
+
+/* ==========================================
+   CONFIGURACION GENERAL
+========================================== */
+
 * {
     box-sizing: border-box;
 }
@@ -6,12 +29,17 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #101827;
-    color: white;
+    background: var(--fondo);
+    color: var(--texto);
 }
 
+/* ==========================================
+   ENCABEZADO
+========================================== */
+
 .encabezado {
-    background: #17243a;
+    background: var(--azul-oscuro);
+    color: var(--blanco);
     padding: 25px 5%;
     display: flex;
     justify-content: space-between;
@@ -22,18 +50,23 @@ body {
 
 .encabezado h1 {
     margin: 0;
-    color: #42d6a4;
+    color: var(--blanco);
     font-size: 30px;
 }
 
 .encabezado p {
-    color: #bdc8d8;
+    margin-top: 7px;
+    color: #c9dce5;
 }
 
 .estado {
-    color: #42d6a4;
+    color: #a9e6ca;
     font-weight: bold;
 }
+
+/* ==========================================
+   CONTENEDORES
+========================================== */
 
 .contenedor {
     width: 92%;
@@ -45,80 +78,450 @@ body {
 }
 
 .panel {
-    background: #1b2a41;
+    background: var(--blanco);
+    color: var(--texto);
     padding: 25px;
-    border-radius: 15px;
+    border-radius: 16px;
+    box-shadow: var(--sombra);
 }
 
 .panel h2 {
-    color: #42d6a4;
+    color: var(--azul-oscuro);
+    margin-top: 0;
 }
+
+/* ==========================================
+   CAMARA
+========================================== */
 
 .camara {
     height: 260px;
-    background: #080d16;
-    border: 2px dashed #52657e;
+    background: #172b38;
+    border: 2px solid #d5e1e6;
     border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #aebdce;
-    padding: 15px;
+    color: #ffffff;
+    padding: 0;
+    overflow: hidden;
 }
+
+.camara img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #172b38;
+}
+
+/* ==========================================
+   RECONOCIMIENTO Y SOLICITUD
+========================================== */
 
 .reconocimiento,
 .solicitud {
-    background: #263951;
+    background: var(--fondo-suave);
+    color: var(--texto);
     margin-top: 20px;
-    padding: 18px;
+    padding: 20px;
     border-radius: 12px;
     text-align: center;
 }
 
+.reconocimiento p,
+.solicitud p {
+    color: var(--texto-secundario);
+}
+
+.reconocimiento h2,
+.solicitud h2 {
+    color: var(--azul-principal);
+}
+
+/* ==========================================
+   BOTONES DE CONFIRMACION
+========================================== */
+
 .botones {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-top: 25px;
 }
 
 button {
-    min-height: 85px;
+    min-height: 65px;
     border: none;
     border-radius: 12px;
-    font-size: 21px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-2px);
 }
 
 .confirmar {
-    background: #16a66a;
+    background: var(--verde);
     color: white;
 }
 
 .cancelar {
-    background: #d94343;
+    background: var(--rojo);
     color: white;
 }
 
-button:hover {
-    opacity: 0.85;
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
 }
 
 #resultado {
     text-align: center;
     margin-top: 20px;
+    color: var(--texto);
 }
+
+/* ==========================================
+   MENSAJES
+========================================== */
 
 .historial {
     grid-column: 1 / -1;
 }
 
+.historial p {
+    color: var(--texto-secundario);
+    line-height: 1.6;
+}
+
+/* ==========================================
+   PIE DE PAGINA
+========================================== */
+
 footer {
     text-align: center;
     padding: 25px;
-    color: #aebdce;
+    color: var(--texto-secundario);
+    font-size: 13px;
 }
+
+/* ==========================================
+   HISTORIAL DE SOLICITUDES
+========================================== */
+
+.boton-volver {
+    display: inline-block;
+    background: var(--azul-principal);
+    color: white;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.contenedor-historial {
+    width: 92%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+.estadisticas-historial {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.tarjeta-estadistica {
+    background: var(--blanco);
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--sombra);
+}
+
+.tarjeta-estadistica h2 {
+    color: var(--azul-principal);
+    font-size: 35px;
+    margin: 0 0 10px;
+}
+
+.tarjeta-estadistica p {
+    color: var(--texto-secundario);
+    margin: 0;
+}
+
+.panel-historial {
+    background: var(--blanco);
+    color: var(--texto);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: var(--sombra);
+}
+
+.encabezado-historial {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.encabezado-historial h2 {
+    color: var(--azul-oscuro);
+    margin-bottom: 8px;
+}
+
+.encabezado-historial p {
+    color: var(--texto-secundario);
+}
+
+.boton-actualizar {
+    min-height: auto;
+    padding: 12px 20px;
+    background: var(--azul-principal);
+    color: white;
+    font-size: 15px;
+}
+
+.filtros-historial {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.filtros-historial label {
+    display: block;
+    color: var(--texto);
+    margin-bottom: 8px;
+}
+
+.filtros-historial select,
+.filtros-historial input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    background: var(--fondo-suave);
+    color: var(--texto);
+    font-size: 15px;
+}
+
+.mensaje-historial {
+    color: var(--azul-principal);
+    text-align: center;
+    margin: 20px 0;
+}
+
+.lista-solicitudes {
+    display: grid;
+    gap: 15px;
+}
+
+.tarjeta-solicitud {
+    background: #f7fafb;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--azul-principal);
+}
+
+.solicitud-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.etiqueta-gesto {
+    display: inline-block;
+    background: #dceef4;
+    color: var(--azul-principal);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.solicitud-superior h3 {
+    color: var(--texto);
+    margin: 12px 0;
+}
+
+.estado-solicitud {
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.estado-pendiente {
+    background: #fff1d6;
+    color: #95620b;
+}
+
+.estado-respondida {
+    background: #dff3e8;
+    color: var(--verde);
+}
+
+.fecha-solicitud {
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.respuesta-familiar {
+    background: #edf5f8;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.respuesta-familiar strong {
+    color: var(--verde);
+}
+
+.respuesta-familiar p {
+    color: var(--texto);
+}
+
+.respuesta-familiar small {
+    color: var(--texto-secundario);
+}
+
+.boton-actualizar:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+/* ==========================================
+   ESTILO DE LA PAGINA HISTORIAL
+========================================== */
+
+.pagina-historial {
+    background: var(--fondo);
+    color: var(--texto);
+}
+
+.pagina-historial .encabezado {
+    background: var(--azul-oscuro);
+    color: white;
+    text-align: center;
+}
+
+.pagina-historial .encabezado h1 {
+    color: white;
+}
+
+.pagina-historial .encabezado p {
+    color: #c9dce5;
+}
+
+.pagina-historial .contenedor-historial {
+    max-width: 850px;
+}
+
+.pagina-historial .tarjeta-estadistica,
+.pagina-historial .panel-historial {
+    background: white;
+    color: var(--texto);
+    border-radius: 16px;
+    box-shadow: var(--sombra);
+    border-bottom: none;
+}
+
+.pagina-historial .tarjeta-estadistica h2 {
+    color: var(--azul-principal);
+}
+
+.pagina-historial .tarjeta-estadistica p,
+.pagina-historial .encabezado-historial p {
+    color: var(--texto-secundario);
+}
+
+.pagina-historial .encabezado-historial h2 {
+    color: var(--azul-oscuro);
+}
+
+.pagina-historial .boton-volver,
+.pagina-historial .boton-actualizar {
+    background: var(--azul-principal);
+    color: white;
+}
+
+.pagina-historial .filtros-historial label {
+    color: var(--texto);
+}
+
+.pagina-historial .filtros-historial select,
+.pagina-historial .filtros-historial input {
+    background: var(--fondo-suave);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+}
+
+.pagina-historial .mensaje-historial {
+    color: var(--azul-principal);
+}
+
+.pagina-historial .tarjeta-solicitud {
+    background: #f7fafb;
+    border-left: 4px solid var(--azul-principal);
+}
+
+.pagina-historial .solicitud-superior h3 {
+    color: var(--texto);
+}
+
+.pagina-historial .etiqueta-gesto {
+    background: #dceef4;
+    color: var(--azul-principal);
+}
+
+.pagina-historial .estado-pendiente {
+    background: #fff1d6;
+    color: #95620b;
+}
+
+.pagina-historial .estado-respondida {
+    background: #dff3e8;
+    color: var(--verde);
+}
+
+.pagina-historial .fecha-solicitud {
+    color: var(--texto-secundario);
+}
+
+.pagina-historial .respuesta-familiar {
+    background: #edf5f8;
+}
+
+.pagina-historial .respuesta-familiar strong {
+    color: var(--verde);
+}
+
+.pagina-historial .respuesta-familiar p {
+    color: var(--texto);
+}
+
+.pagina-historial .respuesta-familiar small {
+    color: var(--texto-secundario);
+}
+
+.pagina-historial footer {
+    color: var(--texto-secundario);
+}
+
+/* ==========================================
+   ADAPTACION PARA TELEFONOS Y TABLETAS
+========================================== */
 
 @media (max-width: 750px) {
     .contenedor {
@@ -133,21 +536,48 @@ footer {
         align-items: flex-start;
         flex-direction: column;
     }
+
+    .estadisticas-historial {
+        grid-template-columns: 1fr;
+    }
+
+    .filtros-historial {
+        grid-template-columns: 1fr;
+    }
+
+    .encabezado-historial {
+        align-items: stretch;
+    }
+
+    .boton-actualizar {
+        width: 100%;
+    }
 }
 
-.camara {
-    overflow: hidden;
-    padding: 0;
-}
+@media (max-width: 480px) {
+    .encabezado {
+        padding: 22px 5%;
+    }
 
-.camara img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #080d16;
-}
+    .encabezado h1 {
+        font-size: 25px;
+    }
 
-button:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+    .panel,
+    .panel-historial {
+        padding: 18px;
+    }
+
+    .botones {
+        grid-template-columns: 1fr;
+    }
+
+    button {
+        min-height: 60px;
+        font-size: 17px;
+    }
+
+    .camara {
+        height: 220px;
+    }
 }

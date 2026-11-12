@@ -215,7 +215,17 @@ def familiar():
         "familiar.html"
     )
 
+# ======================================
+# HISTORIAL DE COMUNICACIÓN
+# ======================================
 
+@app.route("/historial")
+@familiar_autenticado
+def historial():
+
+    return render_template(
+        "historial.html"
+    )
 # ======================================
 # SERVICE WORKER
 # ======================================
@@ -615,7 +625,6 @@ app.config.update(
     ).lower() == "true",
     SESSION_COOKIE_SAMESITE="Lax"
 )
-
 
 # ======================================
 # EJECUCIÓN LOCAL

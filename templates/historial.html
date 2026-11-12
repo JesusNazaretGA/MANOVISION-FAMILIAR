@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial | MANOVISIÓN 3.0</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="pagina-historial">
+
+<header class="encabezado">
+    <div>
+        <h1>MANOVISIÓN 3.0</h1>
+        <p>Historial de comunicación asistida</p>
+    </div>
+
+    <a class="boton-volver" href="/familiar">← Volver al inicio</a>
+</header>
+
+<main class="contenedor-historial">
+
+    <section class="estadisticas-historial">
+        <article class="tarjeta-estadistica">
+            <h2 id="totalSolicitudes">0</h2>
+            <p>Total de solicitudes</p>
+        </article>
+
+        <article class="tarjeta-estadistica">
+            <h2 id="pendientesSolicitudes">0</h2>
+            <p>Pendientes</p>
+        </article>
+
+        <article class="tarjeta-estadistica">
+            <h2 id="respondidasSolicitudes">0</h2>
+            <p>Respondidas</p>
+        </article>
+    </section>
+
+    <section class="panel-historial">
+        <div class="encabezado-historial">
+            <div>
+                <h2>Registro de solicitudes</h2>
+                <p>Consulta las necesidades y respuestas familiares.</p>
+            </div>
+
+            <button id="btnActualizar" class="boton-actualizar">
+                ↻ Actualizar
+            </button>
+        </div>
+
+        <div class="filtros-historial">
+            <div>
+                <label for="filtroGesto">Tipo de solicitud</label>
+                <select id="filtroGesto">
+                    <option value="">Todas</option>
+                    <option value="AGUA">Agua</option>
+                    <option value="COMIDA">Comida</option>
+                    <option value="AYUDA">Ayuda</option>
+                    <option value="DOLOR">Dolor</option>
+                    <option value="LLAMAR">Llamar</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="filtroEstado">Estado</label>
+                <select id="filtroEstado">
+                    <option value="">Todos</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="respondida">Respondida</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="filtroFecha">Fecha</label>
+                <input type="date" id="filtroFecha">
+            </div>
+        </div>
+
+        <p id="mensajeHistorial" class="mensaje-historial">
+            Cargando solicitudes...
+        </p>
+
+        <div id="listaSolicitudes" class="lista-solicitudes"></div>
+    </section>
+
+</main>
+
+<footer>
+    MANOVISIÓN 3.0 | Historial de comunicación
+</footer>
+
+<script src="{{ url_for('static', filename='js/historial.js') }}"></script>
+
+</body>
+</html>
+
