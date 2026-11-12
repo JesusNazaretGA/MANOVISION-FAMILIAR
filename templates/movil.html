@@ -1,0 +1,191 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#123b50">
+
+    <title>MANOVISIÓN 3.0 - Móvil</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/movil.css') }}">
+</head>
+
+<body>
+
+<header class="encabezado">
+    <div class="logo">
+        <h1>MANOVISIÓN</h1>
+        <p>Comunicación asistida inteligente</p>
+    </div>
+
+    <div class="estado-sistema">
+        <span class="indicador" id="indicadorSistema"></span>
+        <span id="estadoSistema">Sistema preparado</span>
+    </div>
+</header>
+
+<main class="contenedor">
+
+    <section class="tarjeta camara-tarjeta">
+
+        <h2>Reconocimiento de gestos</h2>
+
+        <div class="contenedor-video">
+
+            <video
+                id="videoCamara"
+                autoplay
+                playsinline
+                muted>
+            </video>
+
+            <div class="mensaje-camara" id="mensajeCamara">
+                <span>📷</span>
+                <p>Presiona iniciar cámara</p>
+            </div>
+
+        </div>
+
+        <div class="controles-camara">
+
+            <button id="btnIniciarCamara" class="btn-principal">
+                INICIAR CÁMARA
+            </button>
+
+            <button id="btnDetenerCamara" class="btn-secundario" disabled>
+                DETENER CÁMARA
+            </button>
+
+        </div>
+
+        <div class="estado-mano">
+            <span class="indicador" id="indicadorMano"></span>
+            <strong id="estadoMano">Esperando cámara</strong>
+        </div>
+
+    </section>
+
+
+    <section class="tarjeta reconocimiento">
+
+        <h2>Gesto detectado</h2>
+
+        <div class="resultado-gesto">
+            <span id="iconoGesto">✋</span>
+
+            <h3 id="nombreGesto">Ninguno</h3>
+
+            <p>
+                Confianza:
+                <strong id="confianza">0%</strong>
+            </p>
+        </div>
+
+        <div class="barra-fondo">
+            <div id="barraConfianza" class="barra-progreso"></div>
+        </div>
+
+        <p id="estadoReconocimiento">
+            Coloca tu mano frente a la cámara.
+        </p>
+
+    </section>
+
+
+    <section class="tarjeta solicitud">
+
+        <h2>Confirmación de solicitud</h2>
+
+        <p class="texto-ayuda">
+            La petición reconocida aparecerá aquí antes de enviarse.
+        </p>
+
+        <div class="solicitud-mensaje">
+
+            <span>Solicitud:</span>
+
+            <h3 id="mensajeSolicitud">
+                Ninguna solicitud
+            </h3>
+
+        </div>
+
+        <p id="estadoSolicitud">
+            Esperando un gesto.
+        </p>
+
+        <div class="botones-confirmacion">
+
+            <button
+                id="btnConfirmar"
+                class="btn-confirmar"
+                disabled>
+
+                ✓ SÍ, CONFIRMAR
+
+            </button>
+
+            <button
+                id="btnCancelar"
+                class="btn-cancelar"
+                disabled>
+
+                ✕ NO, CANCELAR
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section class="tarjeta comunicacion">
+
+        <h2>Comunicación por voz</h2>
+
+        <p id="mensajeVoz">
+            MANOVISIÓN está preparado para ayudarte.
+        </p>
+
+        <button id="btnRepetirVoz" class="btn-secundario">
+            🔊 REPETIR MENSAJE
+        </button>
+
+    </section>
+
+
+    <section class="tarjeta informacion">
+
+        <h2>Estado de conexión</h2>
+
+        <p>
+            Servidor:
+            <strong id="estadoServidor">Sin comprobar</strong>
+        </p>
+
+        <p>
+            Inteligencia artificial:
+            <strong id="estadoIA">Pendiente de iniciar</strong>
+        </p>
+
+        <p>
+            Firebase:
+            <strong id="estadoFirebase">Pendiente</strong>
+        </p>
+
+    </section>
+
+</main>
+
+<footer>
+    MANOVISIÓN 3.0
+    <p>Sistema de comunicación asistida multimodal</p>
+</footer>
+
+<script type="module" src="{{ url_for('static', filename='js/mobile-vision.js') }}"></script>
+
+</body>
+</html>

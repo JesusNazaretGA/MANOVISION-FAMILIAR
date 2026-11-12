@@ -190,6 +190,18 @@ def logout():
         url_for("login")
     )
 
+# ======================================
+# PANTALLA MOVIL MANOVISION
+# ======================================
+
+@app.route("/movil")
+def movil():
+
+    return render_template(
+        "movil.html"
+    )
+
+
 
 # ======================================
 # PÁGINA FAMILIAR
@@ -596,10 +608,11 @@ def health():
 # ======================================
 # CONFIGURACIÓN DE COOKIES
 # ======================================
-
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_SECURE=os.environ.get(
+        "SESSION_COOKIE_SECURE", "false"
+    ).lower() == "true",
     SESSION_COOKIE_SAMESITE="Lax"
 )
 

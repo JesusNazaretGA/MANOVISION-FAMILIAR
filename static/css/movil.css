@@ -1,0 +1,268 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #eef3f6;
+    color: #203442;
+}
+
+.encabezado {
+    background: #123b50;
+    color: white;
+    padding: 22px 16px;
+    text-align: center;
+}
+
+.encabezado h1 {
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+
+.encabezado p {
+    color: #c9dce5;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.estado-sistema {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.indicador {
+    width: 11px;
+    height: 11px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #e5a52b;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 650px;
+    padding: 15px;
+    margin: auto;
+}
+
+.tarjeta {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px #0000000c;
+}
+
+h2 {
+    font-size: 19px;
+    margin-bottom: 17px;
+    color: #123b50;
+}
+
+.contenedor-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #172a35;
+    border-radius: 13px;
+    overflow: hidden;
+}
+
+#videoCamara {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    display: none;
+}
+
+.mensaje-camara {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    gap: 12px;
+}
+
+.mensaje-camara span {
+    font-size: 48px;
+}
+
+.mensaje-camara p {
+    font-size: 15px;
+}
+
+.controles-camara {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+button {
+    width: 100%;
+    border: none;
+    border-radius: 11px;
+    padding: 16px 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-principal {
+    background: #16834a;
+    color: white;
+}
+
+.btn-secundario {
+    background: #e8eff3;
+    color: #203442;
+}
+
+.estado-mano {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.resultado-gesto {
+    text-align: center;
+    padding: 12px;
+}
+
+.resultado-gesto span {
+    display: block;
+    font-size: 45px;
+    margin-bottom: 8px;
+}
+
+.resultado-gesto h3 {
+    font-size: 26px;
+    color: #1683a0;
+    margin-bottom: 9px;
+}
+
+.resultado-gesto p {
+    color: #667782;
+}
+
+.barra-fondo {
+    width: 100%;
+    height: 12px;
+    background: #e5edf1;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.barra-progreso {
+    width: 0%;
+    height: 100%;
+    background: #16834a;
+    transition: width 0.2s;
+}
+
+#estadoReconocimiento,
+#estadoSolicitud {
+    color: #71818b;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.texto-ayuda {
+    color: #71818b;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.solicitud-mensaje {
+    background: #edf5f8;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.solicitud-mensaje span {
+    color: #71818b;
+    font-size: 13px;
+}
+
+.solicitud-mensaje h3 {
+    font-size: 23px;
+    margin-top: 8px;
+    color: #123b50;
+}
+
+.botones-confirmacion {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.btn-confirmar {
+    background: #16834a;
+    color: white;
+}
+
+.btn-cancelar {
+    background: #c93c3c;
+    color: white;
+}
+
+.comunicacion p {
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: #536874;
+}
+
+.informacion p {
+    margin: 12px 0;
+    font-size: 14px;
+}
+
+.informacion strong {
+    color: #16834a;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #71818b;
+    font-size: 13px;
+}
+
+footer p {
+    margin-top: 5px;
+}
+
+@media (max-width: 380px) {
+    .controles-camara,
+    .botones-confirmacion {
+        grid-template-columns: 1fr;
+    }
+
+    .tarjeta {
+        padding: 16px;
+    }
+}
