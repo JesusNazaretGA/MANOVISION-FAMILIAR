@@ -78,6 +78,11 @@
             margin-bottom: 15px;
         }
 
+        h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
         .espera {
             text-align: center;
             padding: 30px 10px;
@@ -101,6 +106,7 @@
             font-weight: bold;
             text-align: center;
             margin: 15px 0;
+            overflow-wrap: anywhere;
         }
 
         button {
@@ -140,7 +146,8 @@
             gap: 10px;
         }
 
-        .respuesta {
+        .respuesta,
+        .respuesta-centro {
             background: #edf3f6;
             color: #203442;
             text-align: left;
@@ -157,25 +164,46 @@
             margin-top: 12px;
         }
 
+        #centroFecha {
+            color: #71818b;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .btn-historial {
+            display: block;
+            width: 100%;
+            padding: 17px;
+            margin-top: 10px;
+            border-radius: 12px;
+            background: #123b50;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
         footer {
             text-align: center;
             padding: 20px;
             color: #71818b;
             font-size: 12px;
         }
-        .btn-historial {
-    display: block;
-    width: 100%;
-    padding: 17px;
-    margin-top: 10px;
-    border-radius: 12px;
-    background: #123b50;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    font-size: 17px;
-    font-weight: bold;
-}
+
+        @media (max-width: 480px) {
+            main {
+                padding: 12px;
+            }
+
+            .tarjeta {
+                padding: 18px;
+            }
+
+            .mensaje {
+                font-size: 22px;
+            }
+        }
     </style>
 </head>
 
@@ -188,6 +216,7 @@
 
 <main>
 
+    <!-- ESTADO DE CONEXION -->
     <section class="estado">
         <div class="indicador"></div>
         <div>
@@ -280,19 +309,117 @@
         </button>
     </section>
 
+    <!-- CENTRO DE COMUNICACION -->
+    <section class="tarjeta" id="tarjetaCentroComunicacion">
+
+        <h2>💬 Centro de Comunicación</h2>
+
+        <p>
+            Aquí aparecerán los mensajes y frases que la persona
+            envíe desde el Centro de Comunicación.
+        </p>
+
+        <div class="espera" id="centroEspera">
+            <div class="icono">💬</div>
+            <h3>Esperando mensajes</h3>
+            <p>
+                Cuando llegue un mensaje del Centro de Comunicación,
+                aparecerá aquí.
+            </p>
+        </div>
+
+        <div id="centroContenido" style="display: none;">
+
+            <p><strong>Mensaje recibido:</strong></p>
+
+            <div class="mensaje" id="centroMensaje">
+                Mensaje de ejemplo
+            </div>
+
+            <p id="centroFecha"></p>
+
+            <button
+                class="btn-hablar"
+                id="centroEscuchar"
+                type="button"
+            >
+                🔊 Escuchar mensaje
+            </button>
+
+            <h3 style="margin-top: 20px;">
+                Respuestas rápidas
+            </h3>
+
+            <div class="respuestas" id="centroRespuestasRapidas">
+
+                <button
+                    class="respuesta-centro"
+                    data-respuesta="Sí, claro."
+                    type="button"
+                >
+                    Sí, claro.
+                </button>
+
+                <button
+                    class="respuesta-centro"
+                    data-respuesta="Enseguida voy."
+                    type="button"
+                >
+                    Enseguida voy.
+                </button>
+
+                <button
+                    class="respuesta-centro"
+                    data-respuesta="No te preocupes, estoy contigo."
+                    type="button"
+                >
+                    Estoy contigo.
+                </button>
+
+                <button
+                    class="respuesta-centro"
+                    data-respuesta="Necesito saber un poco más."
+                    type="button"
+                >
+                    Necesito saber más.
+                </button>
+
+            </div>
+
+            <h3 style="margin-top: 20px;">
+                Escribir respuesta
+            </h3>
+
+            <textarea
+                id="centroRespuestaPersonalizada"
+                placeholder="Escribe una respuesta para la persona..."
+            ></textarea>
+
+            <button
+                class="btn-responder"
+                id="centroEnviar"
+                type="button"
+            >
+                Enviar respuesta
+            </button>
+
+        </div>
+    </section>
+
     <!-- ACCESO AL HISTORIAL -->
-<section class="tarjeta">
-    <h2>Historial de comunicación</h2>
+    <section class="tarjeta">
+        <h2>Historial de comunicación</h2>
 
-    <p>
-        Consulta las solicitudes anteriores y las respuestas
-        que has enviado.
-    </p>
+        <p>
+            Consulta las solicitudes anteriores y las respuestas
+            que has enviado.
+        </p>
 
-    <a href="/historial" class="btn-historial">
-        📋 Ver historial de solicitudes
-    </a>
-</section>
+        <a href="/historial" class="btn-historial">
+            📋 Ver historial de solicitudes
+        </a>
+    </section>
+
 </main>
 
 <footer>

@@ -377,6 +377,119 @@ def api_responder():
 
 
 # ======================================
+# CENTRO DE COMUNICACION
+# ======================================
+
+@app.route("/api/familiar/centro-comunicacion")
+@familiar_autenticado
+def api_centro_comunicacion():
+
+    try:
+        datos = db.reference("centro_comunicacion").get()
+
+        mensajes = []
+
+        if datos:
+            for identificador, mensaje in datos.items():
+
+                if not isinstance(mensaje, dict):
+                    continue
+
+                mensaje["id"] = identificador
+                mensajes.append(mensaje)
+
+        mensajes.sort(
+            key=lambda elemento: elemento.get("fecha", ""),
+            reverse=True
+        )
+
+        return jsonify({
+            "ok": True,
+            "mensajes": mensajes
+        })
+
+    except Exception:
+        app.logger.exception(
+            "Error consultando Centro de Comunicación"
+        )
+
+        return jsonify({
+            "ok": False,
+            "error": "No se pudieron consultar los mensajes."
+        }), 500
+
+
+@app.route(
+    "/api/familiar/centro-comunicacion/responder",
+    methods=["POST"]
+)
+@familiar_autenticado
+def api_responder_centro():
+
+    try:
+        datos = request.get_json(silent=True) or {}
+
+        mensaje_id = datos.get("id")
+        respuesta = datos.get("respuesta")
+
+        if not isinstance(mensaje_id, str) or not mensaje_id.strip():
+            return jsonify({
+                "ok": False,
+                "error": "Falta el identificador del mensaje."
+            }), 400
+
+        if not isinstance(respuesta, str) or not respuesta.strip():
+            return jsonify({
+                "ok": False,
+                "error": "Escribe una respuesta."
+            }), 400
+
+        referencia = db.reference(
+            f"centro_comunicacion/{mensaje_id.strip()}"
+        )
+
+        mensaje = referencia.get()
+
+        if not mensaje:
+            return jsonify({
+                "ok": False,
+                "error": "El mensaje no existe."
+            }), 404
+
+        if mensaje.get("estado") != "pendiente":
+            return jsonify({
+                "ok": False,
+                "error": "Este mensaje ya fue respondido."
+            }), 409
+
+        datos_respuesta = {
+            "texto": respuesta.strip(),
+            "fecha": datetime.now(
+                timezone.utc
+            ).isoformat()
+        }
+
+        referencia.update({
+            "estado": "respondida",
+            "respuesta": datos_respuesta
+        })
+
+        return jsonify({
+            "ok": True,
+            "respuesta": datos_respuesta
+        })
+
+    except Exception:
+        app.logger.exception(
+            "Error respondiendo mensaje del Centro"
+        )
+
+        return jsonify({
+            "ok": False,
+            "error": "No se pudo guardar la respuesta."
+        }), 500
+
+# ======================================
 # REGISTRAR DISPOSITIVOS FAMILIARES
 # ======================================
 

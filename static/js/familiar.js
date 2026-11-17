@@ -267,3 +267,311 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(consultarSolicitudes, 2000);
 
 });
+
+// ============================================
+// CENTRO DE COMUNICACION - PANEL FAMILIAR
+// ============================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const centroEspera = document.getElementById("centroEspera");
+    const centroContenido = document.getElementById("centroContenido");
+    const centroMensaje = document.getElementById("centroMensaje");
+    const centroFecha = document.getElementById("centroFecha");
+
+    const centroEscuchar = document.getElementById("centroEscuchar");
+    const centroEnviar = document.getElementById("centroEnviar");
+
+    const centroTextarea = document.getElementById(
+        "centroRespuestaPersonalizada"
+    );
+
+    const centroBotonesRapidos = document.querySelectorAll(
+        ".respuesta-centro"
+    );
+
+    let centroMensajeActivo = null;
+    let centroConsultando = false;
+    let centroEnviando = false;
+    let centroRepetirConsulta = false;
+
+    function centroHablar(texto) {
+
+        if (!("speechSynthesis" in window)) {
+            return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const voz = new SpeechSynthesisUtterance(texto);
+
+        voz.lang = "es-MX";
+        voz.rate = 0.9;
+        voz.pitch = 1;
+
+        window.speechSynthesis.speak(voz);
+    }
+
+    function centroActivarControles(activar) {
+
+        const habilitar = activar && !centroEnviando;
+
+        centroEscuchar.disabled = !habilitar;
+        centroEnviar.disabled = !habilitar;
+        centroTextarea.disabled = !habilitar;
+
+        centroBotonesRapidos.forEach(boton => {
+            boton.disabled = !habilitar;
+        });
+    }
+
+    function centroMostrarMensaje(datos) {
+
+        if (centroMensajeActivo?.id === datos.id) {
+            return;
+        }
+
+        centroMensajeActivo = datos;
+
+        centroMensaje.textContent =
+            datos.mensaje || "Mensaje recibido.";
+
+        if (datos.fecha) {
+
+            const fecha = new Date(datos.fecha);
+
+            centroFecha.textContent =
+                "Recibido: " + fecha.toLocaleString("es-MX");
+
+        } else {
+
+            centroFecha.textContent = "Mensaje recibido.";
+
+        }
+
+        centroEspera.style.display = "none";
+        centroContenido.style.display = "block";
+
+        centroTextarea.value = "";
+
+        centroActivarControles(true);
+
+        centroHablar(
+            "Nuevo mensaje del Centro de Comunicación. " +
+            centroMensaje.textContent
+        );
+
+        console.log("Mensaje del Centro recibido:", datos.id);
+    }
+
+    function centroMostrarEspera() {
+
+        centroMensajeActivo = null;
+
+        centroContenido.style.display = "none";
+        centroEspera.style.display = "block";
+
+        centroActivarControles(false);
+    }
+
+    async function centroConsultarMensajes() {
+
+        if (centroConsultando) {
+            centroRepetirConsulta = true;
+            return;
+        }
+
+        centroConsultando = true;
+
+        try {
+
+            do {
+
+                centroRepetirConsulta = false;
+
+                const respuesta = await fetch(
+                    "/api/familiar/centro-comunicacion?_=" + Date.now(),
+                    {
+                        method: "GET",
+                        cache: "no-store"
+                    }
+                );
+
+                if (!respuesta.ok) {
+                    throw new Error(
+                        "Error consultando el Centro de Comunicación."
+                    );
+                }
+
+                const datos = await respuesta.json();
+
+                if (
+                    !datos.ok ||
+                    !Array.isArray(datos.mensajes)
+                ) {
+                    throw new Error(
+                        "Respuesta incorrecta del Centro de Comunicación."
+                    );
+                }
+
+                const pendientes = datos.mensajes
+                    .filter(item => item.estado === "pendiente")
+                    .sort((a, b) =>
+                        new Date(b.fecha) - new Date(a.fecha)
+                    );
+
+                console.log(
+                    "Mensajes pendientes del Centro:",
+                    pendientes.length
+                );
+
+                if (pendientes.length > 0) {
+
+                    centroMostrarMensaje(pendientes[0]);
+
+                } else {
+
+                    centroMostrarEspera();
+
+                }
+
+            } while (centroRepetirConsulta);
+
+        } catch (error) {
+
+            console.error(
+                "Error consultando Centro de Comunicación:",
+                error
+            );
+
+        } finally {
+
+            centroConsultando = false;
+
+        }
+    }
+
+    // Escuchar mensaje.
+    centroEscuchar.addEventListener("click", () => {
+
+        if (!centroMensajeActivo) {
+            return;
+        }
+
+        centroHablar(centroMensajeActivo.mensaje);
+
+    });
+
+    // Seleccionar respuestas rápidas.
+    centroBotonesRapidos.forEach(boton => {
+
+        boton.addEventListener("click", () => {
+
+            if (!centroMensajeActivo || centroEnviando) {
+                return;
+            }
+
+            centroTextarea.value = boton.dataset.respuesta || "";
+            centroTextarea.focus();
+
+        });
+
+    });
+
+    // Enviar respuesta al Centro de Comunicación.
+    centroEnviar.addEventListener("click", async () => {
+
+        if (!centroMensajeActivo || centroEnviando) {
+            return;
+        }
+
+        const respuestaTexto = centroTextarea.value.trim();
+
+        if (!respuestaTexto) {
+            alert("Escribe una respuesta primero.");
+            return;
+        }
+
+        const idMensaje = centroMensajeActivo.id;
+
+        centroEnviando = true;
+
+        centroEnviar.textContent = "Enviando...";
+        centroActivarControles(false);
+
+        try {
+
+            const respuesta = await fetch(
+                "/api/familiar/centro-comunicacion/responder",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: idMensaje,
+                        respuesta: respuestaTexto
+                    })
+                }
+            );
+
+            const resultado = await respuesta.json();
+
+            if (!respuesta.ok || !resultado.ok) {
+
+                throw new Error(
+                    resultado.error ||
+                    "No se pudo enviar la respuesta."
+                );
+
+            }
+
+            console.log(
+                "Respuesta del Centro guardada:",
+                idMensaje
+            );
+
+            centroHablar("Respuesta enviada correctamente.");
+
+            alert("Respuesta guardada en Firebase.");
+
+            centroTextarea.value = "";
+
+            centroMensajeActivo = null;
+
+            await centroConsultarMensajes();
+
+        } catch (error) {
+
+            console.error(
+                "Error al responder mensaje del Centro:",
+                error
+            );
+
+            alert(
+                "Error al enviar la respuesta: " + error.message
+            );
+
+        } finally {
+
+            centroEnviando = false;
+
+            centroEnviar.textContent = "Enviar respuesta";
+
+            centroActivarControles(
+                Boolean(centroMensajeActivo)
+            );
+
+            centroConsultarMensajes();
+
+        }
+
+    });
+
+    // Primera consulta.
+    centroConsultarMensajes();
+
+    // Consultar mensajes cada 2 segundos.
+    setInterval(centroConsultarMensajes, 2000);
+
+});
